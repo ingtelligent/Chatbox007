@@ -1,0 +1,26 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split
+from joblib import dump
+import pandas as pd
+
+# Giả sử bạn có một dataframe pandas với hai cột: 'text' chứa câu hỏi, 'label' chứa nhãn (1 nếu câu hỏi thuộc chuyên môn, 0 nếu không)
+df = pd.read_csv('questions.csv')
+
+X_train, X_test, y_train, y_test = train_test_split(df['text'], df['label'], test_size=0.2, random_state=42)
+
+# Xây dựng pipeline: Bước đầu tiên là chuyển đổi từ văn bản sang vector TF-IDF, bước thứ hai là phân loại bằng Logistic Regression
+text_clf = Pipeline([
+    ('tfidf', TfidfVectorizer()),
+    ('clf', LogisticRegression()),
+])
+
+# Huấn luyện mô hình với dữ liệu huấn luyện
+text_clf.fit(X_train, y_train)
+
+# Kiểm tra độ chính xác của mô hình với dữ liệu kiểm tra
+print(f"Accuracy: {text_clf.score(X_test, y_test)}")
+
+# Lưu mô hình vào file
+dump(text_clf, 'text_classifier.pkl')

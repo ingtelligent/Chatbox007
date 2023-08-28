@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoMICRO Expert</title>
+	<script type="text/javascript">
+    // var experts = {{ experts | tojson | safe }};
+	</script>
+    <script src="/static/script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js'></script>
+</head>
+<body>
+    <div class="container">
+        <h1>CHUYÊN GIA GoMICRO</h1>
+        <div id="experts" class="expert-list">
+            {% for expert_id, expert in experts.items() %}
+                <div class="expert" data-expert-id="{{ expert_id }}">
+                    <img src="{{ expert['avatar'] }}">
+                    <h2>{{ expert_id }}</h2>
+                    <p>{{ expert['role'] }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="prompts" class="prompt-list" ></div>
+        <div id="chatBox" class="chatbox"></div>
+        <div class="textbox">
+            <input id="textbox" type="text" placeholder="Nhập thông tin vào đây..." autocomplete="off">
+            <button id="sendButton">Gửi</button>
+        </div>
+	</div>
+</body>
+</html>

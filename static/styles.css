@@ -1,0 +1,411 @@
+h1 {
+    font-size: 2.5em; /* adjust as needed */
+    text-align: center; /* centers the text horizontally */
+    padding: 20px; /* adjust as needed */
+    color: #333; /* initial color of the text */
+    background: linear-gradient(45deg, #017FA2, #bfffc7); /* animated gradient background */
+    background-size: 200% 200%; /* for the animation to work properly */
+    animation: gradient 15s ease infinite, bounce 12s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 100% 0%; }
+    50% { background-position: 0% 100%; }
+    100% { background-position: 100% 0%; }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+}
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #017FA2, #bfffc7);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+	height: 750px; /* Increase the container height */
+    width: 80%;
+    padding: 10;
+    box-sizing: border-box;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.1);
+}
+
+.expert-list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+}
+
+.expert {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    flex: 1;
+    margin: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+	background-color: #e0f8f1;
+    position: relative;
+}
+
+.expert img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 2px;
+}
+
+.expert:hover {
+    transform: scale(1.1);
+	background-color: #c5f3e8;
+}
+.expert.active {
+    border: 2px solid #008577;  
+    background-color: #c5f3e8;
+    z-index: 2;
+}
+
+.expert.stacked {
+    z-index: 1;
+}
+.prompt-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: -240px;
+    margin-bottom: 120px;
+    margin-left: 37%;
+    width: 62%;
+    height: 20%;
+}
+.prompt {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.prompt:hover {
+    transform: scale(1.1);
+	background-color: #c5f3e8;
+}
+
+.prompt.selected {
+    border: 2px solid #008577; /* thay đổi viền khi được chọn */
+    background-color: #c5f3e8; /* thay đổi màu nền khi được chọn */
+}
+
+.prompts {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: #f9f9f9;
+}
+
+.prompts div {
+    padding: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.prompts div:hover {
+    background-color: #e0e0e0;
+}
+
+.system-message {
+    background-color: #aaa;
+    color: white;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 5px;
+    align-self: center;
+}
+
+
+.chatbox {
+    height: 305px;
+    padding: 10px;
+    margin-top: 25px;
+	margin-left: 15px; /* khoảng cách bên ngoài chatbox về phía bên trái */
+    margin-right: 15px; /* khoảng cách bên ngoài chatbox về phía bên phải */
+    overflow-y: auto;
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 5px;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.1);
+}
+
+.textbox {
+    width: 100%;
+    padding: 2px;
+    margin-top: 10px;
+	margin-left: 3px;
+}
+
+.chat-output {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    font-size: 1em; /* adjust as needed */
+    color: #333; /* adjust as needed */
+    line-height: 1.5; /* adjust as needed */
+}
+
+.typing-indicator {
+    animation: pulse 1s infinite; /* Apply the pulse animation */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 40px;
+    height: 10px;
+}
+
+.typing-indicator span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #333;
+    margin: 0 2px;
+    opacity: 0;
+    animation: typing 1.4s infinite, color-change 2s infinite; /* Apply the color-change animation */
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: 0.2s, 0s; /* Add a second delay for the color-change animation */
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.4s, 0.5s; /* Add a second delay for the color-change animation */
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.6s, 1s; /* Add a second delay for the color-change animation */
+}
+
+@keyframes typing {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes color-change {
+    0% { background-color: red; }
+    25% { background-color: orange; }
+    50% { background-color: green; }
+    75% { background-color: blue; }
+    100% { background-color: purple; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+@keyframes spin {
+    0% {
+        --rotate: 0deg;
+    }
+    100% {
+        --rotate: 360deg;
+    }
+}
+.textbox input {
+    width: 80%;
+    padding: 2px;
+	border: none;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.8);
+    color: black;
+}
+
+.textbox button {
+    width: 18%;
+    margin-left: 2%;
+    padding: 15px;
+    border: none;
+    background: rgba(34, 73, 74, 0.7);
+    backdrop-filter: blur(5px);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.1);
+}
+
+.textbox button:hover {
+    transform: scale(1.1);
+}
+
+.textbox {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.textbox input {
+    flex: 1 0 70%;
+    margin-right: 10px;
+}
+
+.textbox button {
+    flex: 1 0 10%;
+    margin-left: 5px;
+	margin-right: 8px;
+}
+
+.chat-avatar-and-message {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.chat-avatar {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.chat-avatar-and-message {
+    border-bottom: 0.5px solid transparent;
+    background-image: linear-gradient(to right, #23494A, #bfffc7);
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    background-position: bottom;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+/* css1 with table formatting */
+
+.chat-output table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 5px 0;
+}
+
+.chat-output th, .chat-output td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+}
+
+.chat-output th {
+    background-color: #f2f2f2;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 3px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.1);
+}
+
+.prompt-display {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.input-label {
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.5);
+    color: #333;
+    margin-bottom: 10px;
+	width: 70%;
+}
+
+.submit-button {
+    padding: 10px;
+    border: none;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(5px);
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.1);
+}
+
+.submit-button:hover {
+    transform: scale(1.1);
+}
+
+@keyframes blink {
+    0% {background-color: #ddd;}
+    50% {background-color: #fff;}
+    100% {background-color: #ddd;}
+}
+
+.system-message {
+    animation: blink 1s ease-out;
+	background-color: #008577
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.loading-indicator {
+    display: none;
+    width: 100px;
+    height: 100px;
+}
+
+/* Show the loading indicator when waiting for response */
+.chatbox.waiting .loading-indicator {
+    display: block;
+}
