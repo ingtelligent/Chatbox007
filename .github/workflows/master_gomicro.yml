@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'GOMICRO'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_44750825B5DC47D38BEEC388AEF84E86 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4B4B7FE3239A414CABB9FC370C79CE0B }}
